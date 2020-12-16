@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Test Report</title>
+    <link href="assets/style.css" rel="stylesheet" type="text/css"/></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) { // eslint-disable-line no-redeclare
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    const colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    let key;
+    if (elem.classList.contains('result')) {
+        key = key_result;
+    } else if (elem.classList.contains('links')) {
+        key = key_link;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() { // eslint-disable-line no-unused-vars
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() { // eslint-disable-line no-unused-vars
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    const extras = colresult_elem.parentNode.nextElementSibling;
+    const expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove('collapsed');
+    expandcollapse.classList.remove('expander');
+    expandcollapse.classList.add('collapser');
+}
+
+function hide_extras(colresult_elem) {
+    const extras = colresult_elem.parentNode.nextElementSibling;
+    const expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add('collapsed');
+    expandcollapse.classList.remove('collapser');
+    expandcollapse.classList.add('expander');
+}
+
+function show_filters() {
+    const filter_items = document.getElementsByClassName('filter');
+    for (let i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+function add_collapse() {
+    // Add links for show/hide all
+    const resulttable = find('table#results-table');
+    const showhideall = document.createElement('p');
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        const collapsed = get_query_parameter('collapsed') || 'Passed';
+        const extras = elem.parentNode.nextElementSibling;
+        const expandcollapse = document.createElement('span');
+        if (extras.classList.contains('collapsed')) {
+            expandcollapse.classList.add('expander');
+        } else if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add('collapsed');
+            expandcollapse.classList.add('expander');
+        } else {
+            expandcollapse.classList.add('collapser');
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener('click', function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains('collapsed')) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    });
+}
+
+function get_query_parameter(name) {
+    const match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () { // eslint-disable-line no-unused-vars
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    sort_column(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener('click',
+            function() {
+                sort_column(elem);
+            }, false);
+    });
+}
+
+function sort_table(clicked, key_func) {
+    const rows = find_all('.results-table-row');
+    const reversed = !clicked.classList.contains('asc');
+    const sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    const thead = document.getElementById('results-table-head');
+    document.getElementById('results-table').remove();
+    const parent = document.createElement('table');
+    parent.id = 'results-table';
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName('BODY')[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    const sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+
+    sort_array.sort(function(a, b) {
+        const key_a = a[0];
+        const key_b = b[0];
+
+        if (key_a == key_b) return 0;
+
+        if (reversed) {
+            return key_a < key_b ? 1 : -1;
+        } else {
+            return key_a > key_b ? 1 : -1;
+        }
+    });
+
+    return sort_array.map(function(item) {
+        const index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_link(col_index) {
+    return function(elem) {
+        const dataCell = elem.childNodes[1].childNodes[col_index].firstChild;
+        return dataCell == null ? '' : dataCell.innerText.toLowerCase();
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        const strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+            'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        const icon = document.createElement('div');
+        icon.className = 'sort-icon';
+        icon.textContent = 'vvv';
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove('desc', 'active');
+        elem.classList.add('asc', 'inactive');
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+    return value.hidden == false;
+}
+
+function filter_table(elem) { // eslint-disable-line no-unused-vars
+    const outcome_att = 'data-test-result';
+    const outcome = elem.getAttribute(outcome_att);
+    const class_outcome = outcome + ' results-table-row';
+    const outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(let i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    const rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    const all_rows_hidden = rows.length == 0 ? true : false;
+    const not_found_message = document.getElementById('not-found-message');
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <h1>report.html</h1>
+    <p>Report generated on 15-Dec-2020 at 20:37:07 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.0</p>
+    <h2>Environment</h2>
+    <table id="environment">
+      <tr>
+        <td>BUILD_ID</td>
+        <td>15</td></tr>
+      <tr>
+        <td>BUILD_NUMBER</td>
+        <td>15</td></tr>
+      <tr>
+        <td>BUILD_TAG</td>
+        <td>jenkins-pyTest-15</td></tr>
+      <tr>
+        <td>BUILD_URL</td>
+        <td><a href="http://localhost:8080/job/pyTest/15/" target="_blank">http://localhost:8080/job/pyTest/15/</a></td></tr>
+      <tr>
+        <td>EXECUTOR_NUMBER</td>
+        <td>0</td></tr>
+      <tr>
+        <td>JENKINS_URL</td>
+        <td><a href="http://localhost:8080/" target="_blank">http://localhost:8080/</a></td></tr>
+      <tr>
+        <td>JOB_NAME</td>
+        <td>pyTest</td></tr>
+      <tr>
+        <td>NODE_NAME</td>
+        <td>master</td></tr>
+      <tr>
+        <td>Packages</td>
+        <td>{"pluggy": "0.13.1", "py": "1.9.0", "pytest": "6.1.2"}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.18362-SP0</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{"html": "3.1.0", "metadata": "1.11.0"}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.9.1</td></tr>
+      <tr>
+        <td>WORKSPACE</td>
+        <td>C:\Users\nursh\PycharmProjects\PySel</td></tr></table>
+    <h2>Summary</h2>
+    <p>2 tests ran in 12.13 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">2 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <h2>Results</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">Result</th>
+          <th class="sortable" col="name">Test</th>
+          <th class="sortable" col="duration">Duration</th>
+          <th class="sortable links" col="links">Links</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">No results found. Try to check the filters</th></tr></thead>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_AmazonHomePage.py::TestHomePage::test_homepage</td>
+          <td class="col-duration">10.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -----------------------------Captured stdout setup------------------------------ <br/>chrome
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     test_homepage:test_AmazonHomePage.py:13  Step 1: Enter Carp in the search box
+INFO     test_homepage:test_AmazonHomePage.py:16  Step 2: click on search<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_AmazonHomePage.py::TestHomePage::test_count_all_products_prices</td>
+          <td class="col-duration">2.07</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log call-------------------------------- <br/>INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Sougayilang Carp Spinning Reel 5+1 Shielded Stainless Steel BB - Carbon Fiber Drag for Live Liner Fishing Action Baitfeeder Standard Fishing Reel Runner for Freshwater
+ $39.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Xhope 30pcs TPR Simulation Fake Soft Baits Corn Carp Fishing Lures Floating Baits with Nice Scent
+ $7.09
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 YOTO Carp Fishing Hair Rigs - 24Pcs High Carbon Steel Curved Barbed Carp Hook Swivel Boilies Fishing Rigs with Braided Thread Line Rolling Carp Fishing Accessories, Size 2 4 6 8
+ $11.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 JSHANMEI Carp Fishing Tackle Kit Including Anti-Tangle Sleeve Line Aligner Bait Screw Stoper Carp Hook Sinker Weight Carp Fishing Terminal Tackle Box
+ $15.85
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Luroad Carp Fishing Hair Rigs, 20 Pcs Curved Barbed Carp Hook Anti-Tangle Swivel Braided Thread line with 3 Card Boilie Bait Stops Dumbell Stoppers and Stringer Needle, Size 2 4 6 8
+ $11.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Croch Inline Method Feeders Set with Quick Release Moulds for Carp Fishing Bait Holder Tool
+ $13.68
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Carponizer carp Fishing Wall Calendar 2020
+ $14.95
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Xhope 30pcs TPR Simulation Fake Soft Baits Corn Carp Fishing Lures Floating Baits with Nice Scent
+ $7.09
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Carp Slayer Funny Fishing T-Shirt
+ $17.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Fishing Carp Hair Boilie Rigs Kit – 45pcs Curved Barbed Carp Hook Braided Line Bait Stopper Needle Tool Scent Corn
+ $17.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Carp Fishing Tackle Kit, Carp Fishing Equipment 217pcs Carp Fishing Bait Fishing Gear Carp Fishing Hooks Carp Fishing Box
+ $23.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 LikeFish Inline Method Feeder Set Carp Fishing Tackle 4 Inline Method Feeders with 1 Rubber Mould Carp Fishing Accessories
+ $10.96
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Phecda Sport 30pcs 12mm Smell Carp Fishing Bait Boilies Eggs / 4 Flavors Floating Ball Beads Feeder Artificial Carp Baits Lure/Hair Rig
+ $7.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 JONO Brothers 290PCS Carp Fishing Accessories Kit, Including Inline Method Feeders, Carp Fishing Tools, Hooks, Fake Corn, Hair Rigs
+ $42.20
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Funny smutty Fisher Carp fishing T-Shirt
+ $16.95
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:30 Product details not found
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 10pcs New Spring Fishing Feeder 25g/0.88oz Carp Сrucian Bream Fishing Tackle
+ $19.15
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 YOTO Carp Fishing Hair Rigs - 24Pcs High Carbon Steel Curved Barbed Carp Hook Swivel Boilies Fishing Rigs with Braided Thread Line Rolling Carp Fishing Accessories
+ $10.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Shaddock Fishing 18pcs Carp Fishing Hair Rigs Braided Thread 8340 High Carbon Steel Hook Swivel Boilies Carp Rigs Carp Fishing Accessories
+ $11.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 J.CARP Women&#x27;s Packable Windbreaker Jacket, Super Lightweight and Visible, Outdoor Active Cycling Running Skin Coat
+ $38.59
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Detenele Bait Screws for Carp Fishing Tackle Boilie Bait Pop Up Chod Rigs 10mm
+ $6.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Milepetus Carp Fishing Baits Hook Lure Trap Luminous Hooks with Drum Type Spring Feeder and Glow Fishing Beads Coarse Fishing Tackle
+ $9.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Zerone Set of 4PCS Outdoor Fishing Rod Swinger, LED Illuminated Fish Bite Indicator for Carp Fishing
+ $33.09
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Wicked Carp Company 8oz (~40/tub) 15mm Strawberry Boilies &amp; Dumbells | Hard Dough Carp Bait &amp; Catfish Bait
+ $8.00
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 JSHANMEI 4packs Carp Hair Rigs Braided Line Heavy Duty Clips Hook Swivel Boilies Carp Fishing Rig Terminal Tackle Kit Size 2 4 6 8
+ $10.88
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Carp Fishing Inline Method Feeders Leads with Easy Release Mould Coarse Set Carp Fishing Baits Lures Accessories Tackles
+ $12.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Czech up your Christmas with a family fun recipe: Chocolate &amp; coconut Rum-balls
+ $10.00
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Runnin&#x27;: UNLV Rebels A Basketball Legacy
+ $30.62
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 SAN LIKE Fishing Net Fish Landing Nets Collapsible Telescopic Sturdy Pole Handle for Saltwater Freshwater Extending to 36/43/71/98inches
+ $17.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Ashconfish Braided Fishing Line – Real Color Fastness – 4 &amp; 8 Braids/Strands – from 6lb 8lb to 300lb – Abrasion Resistant Braided Lines – Incredible Superline – Zero Stretch – Smaller Diameter
+ $23.28
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Scotank Fishing Leader Wire Tooth Proof 7 Strand Stainless Steel with swivels Snap Kits Connect Tackle Lures Rig or Hooks Three Size
+ $11.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Brocade Carp Girl Top Sweater 1
+ $32.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 powerer 100pcs PVA Carp Fishing Bags Quick Water Soluble Baits Bag for Solid Baits Carp Fishing Equipment Tackle Kit
+ $10.39
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 YOTO Carp Fishing Hair Rigs - 24Pcs High Carbon Steel Curved Barbed Carp Hook Swivel Boilies Fishing Rigs with Braided Thread Line Rolling Carp Fishing Accessories, Size 2 4 6 8
+ $11.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 25pcs Carp Fishing Hair Rigs Kit, Including 18pcs Carp Rigs 3 Cards Boilie Stoppers and 4pcs Bait Needle Tool Carp Fishing Leader Rigging Terminal Tackle Set
+ $15.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Inline Method Lead Carp Fishing Set with 1 Quick Release Mould Coarse for Bait Holder Tool
+ $12.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 SAMSFX Carp Fishing Baiting Rigs Tool Kit Set Fishing Bait Needle Swinger Driller Kit Combo
+ $8.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 JSHANMEI Carp Fishing Tackle Kit Including Anti-Tangle Sleeve Line Aligner Bait Screw Stoper Carp Hook Sinker Weight Carp Fishing Terminal Tackle Box
+ $21.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 JSHANMEI Carp Fishing Inline Method Feeder with Quick Release Mould Carp Fishing Tackle Feeder Rig
+ $11.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Thermwell H1591SN3EZ 1-13/16x36 SN Carp Bar - Quantity 1
+ $11.52
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Mimilure 500pcs Carp Fishing Hair Rig Extender Boilie Bait Stops Boilie Stopper Carp Fishing Tackle
+ $6.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Sougayilang Carp Spinning Reel 5+1 Shielded Stainless Steel BB - Carbon Fiber Drag for Live Liner Fishing Action Baitfeeder Standard Fishing Reel Runner for Freshwater
+ $39.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Lixada Fishing Bite Alarm 2 LEDs Carp Fishing Fish Indicator Water Resistant Adjustable Tone Volume Sound Alert for Fishing Rod
+ $20.79
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 J.CARP Military Tactical Backpack Large 3 Day Assault Pack Army Molle Bug Out Bag Backpacks
+ $39.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Mimilure 4Pcs Carp Fishing Rod Rest U-Head Rod Grips Rest Fishing Rod Holder Carp Fishing Tackle Gripper Rest Thread M3/8
+ $10.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Simulation Fish Plush Toy Soft Fish Toy Pillow Cushion Stuffed Toy Oversized Pillow Creative Gift Home Decor 23.6 in, Gold Carp
+ $18.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 BESPORTBLE 12PCS Luminous Carp Fishing Feeder Coil Inline Method Fishing Tackle Bait Thrower in-line Method Lures Cage Basket Baits
+ $10.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Pro Cure Sweet Corn Scent Bait Oil, 2 Ounce (BO-CRN)
+ $8.77
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Carp Fishing Hair Rigs 24 Pcs High Carbon Steel Barbless Hook Rolling Swivel Boilies Carp Fishing Rigs with 2 Card Boilie Bait Stops and 2 Different Needles Size 2# 4# 6# 8#
+ $10.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Carp Fishing Baiting Rigging Needle Baiting Rig Tool Kit Swinger Driller Knot Puller Line Scissors Boilie Stops Set Combo
+ $7.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Magic 22-24 Carp Bait
+ $6.92
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Funny Carp Holy Carp Shirt Fishing Fish Gift T-Shirt
+ $15.98
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Lewondr Electric Moving Fish Toy for Cats, Artificial Interactive Plush Cat Toy Simulated Wiggle Fish Catnip Toys Zipper Kitten Toy USB Rechargeable Funny Playing Chew Toy - Black Crucian &amp; Carp
+ $14.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Mimilure 10Pcs/Pk Carp Fishing Bait Trap Cage Feeder Basket Holder Coarse Lure Feeder Carp Fishing Tackle Kit,Size L/M/S Available
+ $14.89
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Unknown Pro-Cure Carp Spit Super Gel, 2 Ounce
+ $8.77
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Luroad Carp Fishing Hair Rigs, 20 Pcs Curved Barbed Carp Hook Anti-Tangle Swivel Braided Thread line with 3 Card Boilie Bait Stops Dumbell Stoppers and Stringer Needle, Size 2 4 6 8
+ $11.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 unclesportinfof 10/25/50/100 PCS Fishing Line Sinker Slides Duo Lock Snaps High Strength Stainless Steel Sinker Slider Swivel Snap Kit Fishing Tackle
+ $7.69
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Savage Gear US-SG 4D Splitfin Pulse Tail Trout Slow Sink
+ $13.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 Funcle Gift for Uncle Graphic Novelty Sarcastic Funny T Shirt
+ $18.99
+INFO     test_count_all_products_prices:test_AmazonHomePage.py:27 PLUSINNO Fishing Rod and Reel Combos Carbon Fiber Telescopic Fishing Rod with Reel Combo Sea Saltwater Freshwater Kit Fishing Rod Kit
+ $52.99<br/></div></td></tr></tbody></table></body></html>

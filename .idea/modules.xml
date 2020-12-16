@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../DraftSelenium/.idea/DraftSelenium.iml" filepath="$PROJECT_DIR$/../DraftSelenium/.idea/DraftSelenium.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/PySel.iml" filepath="$PROJECT_DIR$/.idea/PySel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../PySelenium/.idea/PySelenium.iml" filepath="$PROJECT_DIR$/../PySelenium/.idea/PySelenium.iml" />
+    </modules>
+  </component>
+</project>

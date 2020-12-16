@@ -1,0 +1,98 @@
+1607837410954	geckodriver	INFO	Listening on 127.0.0.1:55432
+1607837414074	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\nursh\\AppData\\Local\\Temp\\rust_mozprofilegN9M10"
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1607837416881	Marionette	INFO	Listening on port 55440
+1607837417248	Marionette	WARN	TLS certificate errors will be ignored for this session
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+1607837420161	Marionette	INFO	Stopped listening on port 55440
+JavaScript error: resource:///modules/FaviconLoader.jsm, line 582: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x39013F,name=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1607839608839	geckodriver	INFO	Listening on 127.0.0.1:51698
+1607839611908	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\nursh\\AppData\\Local\\Temp\\rust_mozprofiletTGOB4"
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1607839614004	Marionette	INFO	Listening on port 51707
+1607839614078	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 271: NS_ERROR_FAILURE: Should pass a non-null uri
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+1607839617251	Marionette	INFO	Stopped listening on port 51707
+JavaScript error: resource:///modules/FaviconLoader.jsm, line 582: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1607840342380	geckodriver	INFO	Listening on 127.0.0.1:52002
+1607840345468	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\nursh\\AppData\\Local\\Temp\\rust_mozprofileXBZlt0"
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1607840348938	Marionette	INFO	Listening on port 52010
+1607840349140	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 271: NS_ERROR_FAILURE: Should pass a non-null uri
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+1607840352266	Marionette	INFO	Stopped listening on port 52010
+JavaScript error: about:srcdoc, line 9: TypeError: parent is null
+JavaScript error: resource:///modules/FaviconLoader.jsm, line 582: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1607842598628	geckodriver	INFO	Listening on 127.0.0.1:52248
+1607842601746	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\nursh\\AppData\\Local\\Temp\\rust_mozprofiletFDYcF"
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1607842604123	Marionette	INFO	Listening on port 52256
+1607842604416	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 271: NS_ERROR_FAILURE: Should pass a non-null uri
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+JavaScript error: https://images-na.ssl-images-amazon.com/images/I/11Y+5x+kkTL._RC|510-DqpHv3L.js,11HZwqTrxmL.js,11giXtZCwVL.js,01+z+uIeJ-L.js,014VApivrFL.js,21NNXfMitSL.js,11GXfd3+z+L.js,513Ys2IkKiL.js,11AHlQhPRjL.js,01Gpt4sPPhL.js,11OREnu1epL.js,11KbZymw5ZL.js,21r53SJg7LL.js,0190vxtlzcL.js,51A3Le4wx8L.js,31R+Yg2le+L.js,01Gf12ogmOL.js,01ezj5Rkz1L.js,11VS-C+YWGL.js,31pOTH2ZMRL.js,01rpauTep4L.js,010w70919+L.js_.js?AUIClients/AmazonUI&ooutlTyX#page_type-Gateway, line 162: SyntaxError: FontFaceSet.load: Invalid font shorthand
+1607842607676	Marionette	INFO	Stopped listening on port 52256
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+

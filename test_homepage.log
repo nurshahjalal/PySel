@@ -1,0 +1,12 @@
+2020-12-11 00:41:23,361 : INFO : test_homepage :  Step 1: Enter Carp in the search box
+2020-12-11 00:41:25,722 : INFO : test_homepage :  Step 2: click on search
+2020-12-11 00:44:57,713 : INFO : test_homepage :  Step 1: Enter Carp in the search box
+2020-12-11 00:44:59,437 : INFO : test_homepage :  Step 2: click on search
+2020-12-11 16:12:47,272 : INFO : test_homepage :  Step 1: Enter Carp in the search box
+2020-12-11 16:12:48,870 : INFO : test_homepage :  Step 2: click on search
+2020-12-11 16:23:46,293 : INFO : test_homepage :  Step 1: Enter Carp in the search box
+2020-12-11 16:23:47,950 : INFO : test_homepage :  Step 2: click on search
+2020-12-13 00:52:28,234 : INFO : test_homepage :  Step 1: Enter Carp in the search box
+2020-12-13 00:52:29,888 : INFO : test_homepage :  Step 2: click on search
+2020-12-13 00:52:55,062 : INFO : test_homepage :  Step 1: Enter Carp in the search box
+2020-12-13 00:52:56,758 : INFO : test_homepage :  Step 2: click on search
