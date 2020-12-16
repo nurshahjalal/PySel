@@ -35,6 +35,8 @@ class TestBase:
     def explicit_wait_for_link_text(self, link_text):
         WebDriverWait(self.driver, 10).until(expected_conditions.presence_of_element_located((By.LINK_TEXT, link_text)))
 
+    def demo(self):
+        pass
 
 
 
