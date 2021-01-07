@@ -35,8 +35,11 @@ def setup(request):
             path = "usr/bin/chromedriver"
             print(path)
             options = Options()
-            options.add_argument("--disable-dev-shm-usage");
-            options.add_argument("--no-sandbox");
+            options.add_argument("--disable-dev-shm-usage")
+            options.add_argument("--no-sandbox")
+            options.add_argument("start-maximized")
+            options.add_argument("disable-infobars")
+            options.add_experimental_option("useAutomationExtension", False)
             driver = webdriver.Chrome("/usr/bin/chromedriver", options=options)
         else:
             serv = "C:\\Users\\" + username + "\\Downloads\\chromedriver_win32_v87\\chromedriver.exe"
