@@ -1,5 +1,6 @@
 import getpass
 import pytest
+import sys
 from selenium import webdriver
 driver = None
 
@@ -16,14 +17,23 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="class")
 def setup(request):
     global driver
+
+    # getting os platform
+    os_platform = sys.platform
+    print(f"Executing Tests on {os_platform}")
+
     # get logged in system username
     username = getpass.getuser()
+
     # retrieve command line argument
     browser_name = request.config.getoption("--browser_choice")
     print(browser_name)
     if browser_name.lower() == "chrome":
-        serv = "C:\\Users\\" + username + "\\Downloads\\chromedriver_win32_v87\\chromedriver.exe"
-        driver = webdriver.Chrome(executable_path=serv)
+        if os_platform == "linux":
+            driver = webdriver.Chrome()
+        else:
+            serv = "C:\\Users\\" + username + "\\Downloads\\chromedriver_win32_v87\\chromedriver.exe"
+            driver = webdriver.Chrome(executable_path=serv)
     elif browser_name.lower() == "firefox":
         driver = webdriver.Firefox(executable_path="C:\\Users\\" + username + "\\Downloads\\geckodriver\\geckodriver.exe")
     elif browser_name.lower() == "edge":
