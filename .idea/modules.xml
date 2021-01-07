@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../API_Framework/.idea/API_WooCommerce_Framework.iml" filepath="$PROJECT_DIR$/../API_Framework/.idea/API_WooCommerce_Framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ApiTesting/.idea/ApiTesting.iml" filepath="$PROJECT_DIR$/../ApiTesting/.idea/ApiTesting.iml" />
       <module fileurl="file://$PROJECT_DIR$/../DraftSelenium/.idea/DraftSelenium.iml" filepath="$PROJECT_DIR$/../DraftSelenium/.idea/DraftSelenium.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../PyDraftExercise/.idea/PyDraftExercise.iml" filepath="$PROJECT_DIR$/../PyDraftExercise/.idea/PyDraftExercise.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/PySel.iml" filepath="$PROJECT_DIR$/.idea/PySel.iml" />
       <module fileurl="file://$PROJECT_DIR$/../PySelenium/.idea/PySelenium.iml" filepath="$PROJECT_DIR$/../PySelenium/.idea/PySelenium.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/python_exercise-master/python_exercise-master/.idea/Test1.iml" filepath="$USER_HOME$/Downloads/python_exercise-master/python_exercise-master/.idea/Test1.iml" />
     </modules>
   </component>
 </project>
