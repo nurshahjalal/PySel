@@ -31,11 +31,13 @@ def setup(request):
     print(browser_name)
     if browser_name.lower() == "chrome":
         if os_platform == "linux":
+            print("inside linux")
             path = "usr/bin/chromedriver"
+            print(path)
             options = Options()
             options.add_argument("--disable-dev-shm-usage");
             options.add_argument("--no-sandbox");
-            driver = webdriver.Chrome("usr/bin/chromedriver", options=options)
+            driver = webdriver.Chrome("/usr/bin/chromedriver", options=options)
         else:
             serv = "C:\\Users\\" + username + "\\Downloads\\chromedriver_win32_v87\\chromedriver.exe"
             driver = webdriver.Chrome(executable_path=serv)
