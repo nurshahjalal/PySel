@@ -30,7 +30,7 @@ def setup(request):
     print(browser_name)
     if browser_name.lower() == "chrome":
         if os_platform == "linux":
-            path = "usr/local/bin/chromedriver"
+            path = "usr/bin/chromedriver"
             driver = webdriver.Chrome(executable_path=path)
         else:
             serv = "C:\\Users\\" + username + "\\Downloads\\chromedriver_win32_v87\\chromedriver.exe"
