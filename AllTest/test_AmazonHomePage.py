@@ -6,14 +6,7 @@ from PageObject.ProductPage import ProductPage
 
 class TestHomePage(TestBase):
 
-    def test_homepage(self):
-        driver = HomePage(self.driver)
-        logger = self.get_logger()
-        driver.homepage_search().send_keys("carp")
-        logger.info(" Step 1: Enter Carp in the search box")
 
-        driver.click_on_search().click()
-        logger.info(" Step 2: click on search")
 
     def test_count_all_products_prices(self):
         driver = ProductPage(self.driver)

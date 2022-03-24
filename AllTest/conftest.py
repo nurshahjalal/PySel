@@ -3,6 +3,7 @@ import pytest
 import sys
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 driver = None
 
 '''
@@ -42,10 +43,11 @@ def setup(request):
             options.add_experimental_option("useAutomationExtension", False)
             driver = webdriver.Chrome("/usr/bin/chromedriver", options=options)
         else:
-            serv = "C:\\Users\\" + username + "\\Downloads\\chromedriver_win32_v87\\chromedriver.exe"
-            driver = webdriver.Chrome(executable_path=serv)
+            driver = webdriver.Chrome(ChromeDriverManager().install())
+            #serv = "C:\\Users\\" + username + "\\Downloads\\chromedriver_win32_v87\\chromedriver.exe"
+            #driver = webdriver.Chrome(executable_path=serv)
     elif browser_name.lower() == "firefox":
-        driver = webdriver.Firefox(executable_path="C:\\Users\\" + username + "\\Downloads\\geckodriver\\geckodriver.exe")
+        driver = webdriver.Chrome(ChromeDriverManager().install())
     elif browser_name.lower() == "edge":
         driver = webdriver.Edge(executable_path="C:\\Users\\" + username + "\\Downloads\\edgedriver_win64_v87.0664\\msedgedriver.exe")
     elif browser_name.lower() == "ie":
